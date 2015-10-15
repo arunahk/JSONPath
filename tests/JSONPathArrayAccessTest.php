@@ -35,7 +35,7 @@ class JSONPathArrayAccessTest extends \PHPUnit_Framework_TestCase
         $jsonPath = new JSONPath($data);
         $conferences = $jsonPath->find('.conferences.*');
 
-        $names = [];
+        $names = array();
 
         foreach ($conferences as $conference) {
             $players = $conference->find('.teams.*.players[?(@.active=yes)]');
