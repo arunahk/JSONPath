@@ -17,7 +17,7 @@ class QueryMatchFilter extends AbstractFilter
      */
     public function filter($collection)
     {
-        $return = [];
+        $return = array();
 
         preg_match('/^' . static::MATCH_QUERY_OPERATORS . '$/x', $this->token->value, $matches);
 

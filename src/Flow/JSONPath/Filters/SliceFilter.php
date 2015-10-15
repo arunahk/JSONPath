@@ -25,7 +25,7 @@ class SliceFilter extends AbstractFilter
 
          */
 
-        $result = [];
+        $result = array();
 
         $length = count($collection);
         $start  = $this->token->value['start'];

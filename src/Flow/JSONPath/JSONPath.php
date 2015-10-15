@@ -4,11 +4,10 @@ namespace Flow\JSONPath;
 use ArrayAccess;
 use Iterator;
 use JsonSerializable;
-use Flow\JsonPath\Filters\AbstractFilter;
 
 class JSONPath implements ArrayAccess, Iterator, JsonSerializable
 {
-    protected static $tokenCache = [];
+    protected static $tokenCache = array();
 
     protected $data;
 
@@ -37,12 +36,12 @@ class JSONPath implements ArrayAccess, Iterator, JsonSerializable
     {
         $tokens = $this->parseTokens($expression);
 
-        $collectionData = [$this->data];
+        $collectionData = array($this->data);
 
         foreach ($tokens as $token) {
             $filter = $token->buildFilter($this->options);
 
-            $filteredData = [];
+            $filteredData = array();
 
             foreach ($collectionData as $value) {
                 if (AccessHelper::isCollectionType($value)) {
@@ -160,9 +159,7 @@ class JSONPath implements ArrayAccess, Iterator, JsonSerializable
     {
         $value = AccessHelper::getValue($this->data, $offset);
 
-        return AccessHelper::isCollectionType($value)
-            ? new static($value, $this->options)
-            : $value;
+        return AccessHelper::isCollectionType($value) ? new static($value, $this->options) : $value;
     }
 
     public function offsetSet($offset, $value)

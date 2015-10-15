@@ -10,19 +10,19 @@ class JSONPathArrayAccessTest extends \PHPUnit_Framework_TestCase
     public function testChaining()
     {
         $data = $this->exampleData(rand(0, 1));
-
-        $conferences = (new JSONPath($data))->find('.conferences.*');
+        $jsonPath = new JSONPath($data);
+        $conferences = $jsonPath->find('.conferences.*');
         $teams = $conferences->find('..teams.*');
 
         $this->assertEquals('Dodger', $teams[0]['name']);
         $this->assertEquals('Mets', $teams[1]['name']);
 
-        $teams = (new JSONPath($data))->find('.conferences.*')->find('..teams.*');
+        $teams = $jsonPath->find('.conferences.*')->find('..teams.*');
 
         $this->assertEquals('Dodger', $teams[0]['name']);
         $this->assertEquals('Mets', $teams[1]['name']);
 
-        $teams = (new JSONPath($data))->find('.conferences..teams.*');
+        $teams = $jsonPath->find('.conferences..teams.*');
 
         $this->assertEquals('Dodger', $teams[0]['name']);
         $this->assertEquals('Mets', $teams[1]['name']);
@@ -32,7 +32,8 @@ class JSONPathArrayAccessTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->exampleData(rand(0, 1));
 
-        $conferences = (new JSONPath($data))->find('.conferences.*');
+        $jsonPath = new JSONPath($data);
+        $conferences = $jsonPath->find('.conferences.*');
 
         $names = [];
 
@@ -61,42 +62,42 @@ class JSONPathArrayAccessTest extends \PHPUnit_Framework_TestCase
 
     public function exampleData($asArray = true)
     {
-        $data = [
+        $data = array(
             'name'        => 'Major League Baseball',
             'abbr'        => 'MLB',
-            'conferences' => [
-                [
+            'conferences' => array(
+                array(
                     'name'  => 'Western Conference',
                     'abbr'  => 'West',
-                    'teams' => [
-                        [
+                    'teams' => array(
+                        array(
                             'name'     => 'Dodger',
                             'city'     => 'Los Angeles',
                             'whatever' => 'else',
-                            'players'  => [
-                                ['name' => 'Bob Smith', 'number' => 22],
-                                ['name' => 'Joe Face', 'number' => 23, 'active' => 'yes'],
-                            ],
-                        ]
-                    ],
-                ],
-                [
+                            'players'  => array(
+                                array('name' => 'Bob Smith', 'number' => 22),
+                                array('name' => 'Joe Face', 'number' => 23, 'active' => 'yes'),
+                            ),
+                        )
+                    ),
+                ),
+                array(
                     'name'  => 'Eastern Conference',
                     'abbr'  => 'East',
-                    'teams' => [
-                        [
+                    'teams' => array(
+                        array(
                             'name'     => 'Mets',
                             'city'     => 'New York',
                             'whatever' => 'else',
-                            'players'  => [
-                                ['name' => 'something', 'number' => 14, 'active' => 'yes'],
-                                ['name' => 'something', 'number' => 15],
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ];
+                            'players'  => array(
+                                array('name' => 'something', 'number' => 14, 'active' => 'yes'),
+                                array('name' => 'something', 'number' => 15),
+                            )
+                        )
+                    )
+                )
+            )
+        );
 
         return $asArray ? $data : json_decode(json_encode($data));
 

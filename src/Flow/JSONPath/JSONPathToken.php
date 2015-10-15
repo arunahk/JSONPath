@@ -41,14 +41,14 @@ class JSONPathToken
 
     public static function getTypes()
     {
-        return [
+        return array(
             static::T_INDEX,
             static::T_RECURSIVE,
             static::T_QUERY_RESULT,
             static::T_QUERY_MATCH,
             static::T_SLICE,
             static::T_INDEXES,
-        ];
+        );
     }
 
 

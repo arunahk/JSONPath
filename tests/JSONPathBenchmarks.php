@@ -20,8 +20,9 @@ class JSONPathBenchmarks extends \PHPUnit_Framework_TestCase
         $end1 = microtime(true);
 
         $start2 = microtime(true);
+        $jsonPath = new JSONPath($exampleData);
         for ($i = 0; $i < 100; $i += 1) {
-            $results2 = (new JSONPath($exampleData))->find('$.store.books[?(@.price < 10)]');
+            $results2 = $jsonPath->find('$.store.books[?(@.price < 10)]');
         }
         $end2 = microtime(true);
 
@@ -43,8 +44,9 @@ class JSONPathBenchmarks extends \PHPUnit_Framework_TestCase
         $end1 = microtime(true);
 
         $start2 = microtime(true);
+        $jsonPath = new JSONPath($exampleData);
         for ($i = 0; $i < 100; $i += 1) {
-            $results2 = (new JSONPath($exampleData))->find('$.store.*');
+            $results2 = $jsonPath->find('$.store.*');
         }
         $end2 = microtime(true);
 
@@ -66,8 +68,9 @@ class JSONPathBenchmarks extends \PHPUnit_Framework_TestCase
         $end1 = microtime(true);
 
         $start2 = microtime(true);
+        $jsonPath = new JSONPath($exampleData);
         for ($i = 0; $i < 100; $i += 1) {
-            $results2 = (new JSONPath($exampleData))->find('$..*');
+            $results2 = $jsonPath->find('$..*');
         }
         $end2 = microtime(true);
 
@@ -91,8 +94,9 @@ class JSONPathBenchmarks extends \PHPUnit_Framework_TestCase
         $exampleData = $this->exampleData(true);
 
         $start2 = microtime(true);
+        $jsonPath = new JSONPath($exampleData);
         for ($i = 0; $i < 100; $i += 1) {
-            $results2 = (new JSONPath($exampleData))->find('$..price');
+            $results2 = $jsonPath->find('$..price');
         }
         $end2 = microtime(true);
 

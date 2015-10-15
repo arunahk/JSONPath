@@ -12,14 +12,14 @@ class IndexFilter extends AbstractFilter
     public function filter($collection)
     {
         if (AccessHelper::keyExists($collection, $this->token->value, $this->magicIsAllowed)) {
-            return [
+            return array(
                 AccessHelper::getValue($collection, $this->token->value, $this->magicIsAllowed)
-            ];
+            );
         } else if ($this->token->value === "*") {
             return AccessHelper::arrayValues($collection);
         }
 
-        return [];
+        return array();
     }
 
 }

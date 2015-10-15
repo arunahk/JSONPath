@@ -57,7 +57,7 @@ class JSONPathLexer
         $squareBracketDepth = 0;
         $capturing = false;
         $tokenValue = '';
-        $tokens = [];
+        $tokens =array();
 
         for ($i = 0; $i < $this->expressionLength; $i++) {
             $char = $this->expression[$i];
@@ -172,11 +172,11 @@ class JSONPathLexer
         if (preg_match('/^' . static::MATCH_SLICE . '$/x', $value, $matches)) {
             $parts = explode(':', $value);
 
-            $value = [
+            $value = array(
                 'start' => isset($parts[0]) && $parts[0] !== "" ? (int) $parts[0] : null,
                 'end'   => isset($parts[1]) && $parts[1] !== "" ? (int) $parts[1] : null,
                 'step'  => isset($parts[2]) && $parts[2] !== "" ? (int) $parts[2] : null,
-            ];
+            );
 
             return new JSONPathToken(JSONPathToken::T_SLICE, $value);
         }

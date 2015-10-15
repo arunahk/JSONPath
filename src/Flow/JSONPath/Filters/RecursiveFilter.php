@@ -12,7 +12,7 @@ class RecursiveFilter extends AbstractFilter
      */
     public function filter($collection)
     {
-        $result = [];
+        $result = array();
 
         $this->recurse($result, $collection);
 

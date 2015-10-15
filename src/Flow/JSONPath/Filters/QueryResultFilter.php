@@ -13,7 +13,7 @@ class QueryResultFilter extends AbstractFilter
      */
     public function filter($collection)
     {
-        $result = [];
+        $result = array();
 
         preg_match('/@\.(?<key>\w+)\s*(?<operator>-|\+|\*|\/)\s*(?<numeric>\d+)/', $this->token->value, $matches);
 
